@@ -40,6 +40,45 @@ end
 """
 
 """
+function return_index_order_of_data_for_likelihood_w_plcg_test(egf_dosage)
+    if egf_dosage == 20.0
+        return ["p_egfr", "p_shc", "grb_egfr", "grb_shc"]
+    elseif egf_dosage == 2.0
+        return ["p_egfr"]
+    elseif egf_dosage == 0.2
+        return ["p_egfr"]
+    end
+end
+
+"""
+
+"""
+function return_index_order_of_data_for_likelihood_w_grb_shc_test(egf_dosage)
+    if egf_dosage == 20.0
+        return ["p_egfr", "p_shc", "grb_egfr", "p_plcg"]
+    elseif egf_dosage == 2.0
+        return ["p_egfr", "p_plcg"]
+    elseif egf_dosage == 0.2
+        return ["p_egfr"]
+    end
+end
+
+"""
+
+"""
+function return_index_order_of_data_for_likelihood_w_grb_egfr_test(egf_dosage)
+    if egf_dosage == 20.0
+        return ["p_egfr", "p_shc", "grb_shc", "p_plcg"]
+    elseif egf_dosage == 2.0
+        return ["p_egfr", "p_plcg"]
+    elseif egf_dosage == 0.2
+        return ["p_egfr"]
+    end
+end
+
+"""
+
+"""
 function likelihood_w_pshc_test(experimental_quantities, egf_dosage)
     quantities_per_dose = Array{Float64}(undef,0)
     species_index = return_index_order_of_data_for_likelihood_w_pshc_test(egf_dosage)
@@ -63,6 +102,36 @@ end
 function likelihood_w_pshc_grb2shc_test(experimental_quantities, egf_dosage)
     quantities_per_dose = Array{Float64}(undef,0)
     species_index = return_index_order_of_data_for_likelihood_w_pshc_grb2shc_test(egf_dosage)
+    [append!(quantities_per_dose, experimental_quantities[j]) for j in species_index]
+    return quantities_per_dose
+end
+
+"""
+
+"""
+function likelihood_w_pplcg_test(experimental_quantities, egf_dosage)
+    quantities_per_dose = Array{Float64}(undef,0)
+    species_index = return_index_order_of_data_for_likelihood_w_plcg_test(egf_dosage)
+    [append!(quantities_per_dose, experimental_quantities[j]) for j in species_index]
+    return quantities_per_dose
+end
+
+"""
+
+"""
+function likelihood_w_grbshc_test(experimental_quantities, egf_dosage)
+    quantities_per_dose = Array{Float64}(undef,0)
+    species_index = return_index_order_of_data_for_likelihood_w_grb_shc_test(egf_dosage)
+    [append!(quantities_per_dose, experimental_quantities[j]) for j in species_index]
+    return quantities_per_dose
+end
+
+"""
+
+"""
+function likelihood_w_grbegfr_test(experimental_quantities, egf_dosage)
+    quantities_per_dose = Array{Float64}(undef,0)
+    species_index = return_index_order_of_data_for_likelihood_w_grb_egfr_test(egf_dosage)
     [append!(quantities_per_dose, experimental_quantities[j]) for j in species_index]
     return quantities_per_dose
 end
